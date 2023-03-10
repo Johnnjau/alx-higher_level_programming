@@ -2,7 +2,7 @@
 
 if __name__ == "__main__":
     """Print all names defined by hidden_4 module."""
-    from hidden_4 import hidden
+    from hidden_4.py import hidden_4.pyc
 
     names = dir(hidden_4)
     for names in names:
