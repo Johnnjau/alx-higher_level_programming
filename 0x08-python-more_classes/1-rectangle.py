@@ -2,6 +2,7 @@
 """Class Rectangle"""
 
 
-class Rectangle:
+Class Rectangle
     """defines the rectangle"""
-    pass
+
+
