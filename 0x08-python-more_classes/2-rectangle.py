@@ -18,19 +18,6 @@ def __init__(self, width=0, height=0):
     self._h = height
 
 @property
-def height(self):
-    """Get the height of the Rectangle."""
-    return self._h
-
-@height.setter
-def height(self, value):
-    if not isinstance(value, int):
-        raise TypeError("height must be an integer")
-    if value < 0:
-        raise ValueError("height must be >= 0")
-    self._h = value
-
-@property
 def width(self):
     """Get the width of the Rectangle."""
     return self._w
@@ -43,9 +30,22 @@ def width(self, value):
         raise ValueError("width must be >= 0")
     self._w = value
 
+@property
+def height(self):
+    """Get the height of the Rectangle."""
+    return self._h
+
+@height.setter
+def height(self, value):
+    if not isinstance(value, int):
+        raise TypeError("height must be an integer")
+    if value < 0:
+        raise ValueError("height must be >= 0")
+    self._h = value
+
 def area(self):
     """Return the area of the Rectangle."""
-    return self._h * self._w
+    return self._w * self._h
 
 def perimeter(self):
     """Return the perimeter of the Rectangle."""
