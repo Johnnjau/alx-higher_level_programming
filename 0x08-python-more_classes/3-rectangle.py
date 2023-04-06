@@ -1,59 +1,45 @@
 #!/usr/bin/python3
+"""Rectangle class with width and height attributes"""
+
+
 class Rectangle:
-   """Represent a triangle."""
-
-
-def __init__(self, width=0, height=0):
-    """Initialize a new Rectangle.
-
-    Args:
-        width (int): The width of a new rectangle.
-        height (int): The height of the new rectangle.
-    """
-
-    self.width = width
-    self.height = height
+    def __init__(self, w=0, h=0):
+        self.w = w
+        self.h = h
 
 @property
-def width(self):
-    """Get/set the width of the Rectangle."""
-    return self.width
+def w(self):
+    return self._w
 
-@width.setter
-def width(self, value):
+@w.setter
+def w(self, value):
     if not isinstance(value, int):
         raise TypeError("width must be an integer")
     if value < 0:
         raise ValueError("width must be >= 0")
-    self._width = value
+    self.__w = value
 
 @property
-def height(self):
-    """Get/set the height of the Rectangle."""
-    return self._height
+def h(self):
+    return self._h
 
-@height.setter
-def height(self, value):
+@h.setter
+def h(self, value):
     if not isinstance(value, int):
         raise TypeError("height must be an integer")
     if value < 0:
         raise ValueError("height must be >= 0")
-    self._height = value
-
+    self.__h = value
 
 def area(self):
-   """Return the area of the Rectangle."""
-   return self._width * self._height
+    return (self.__w * self.__h)
 
 def perimeter(self):
-    """Return the Parameter of the Rectangle."""
-    return 2 * (self._width + self._height)
+    if self.__w == 0 or self.__h == 0:
+        return 0
+    return ((self.__w * 2) + (self.__h * 2))
 
 def __str__(self):
-    """Return the printable representation of the Rectangle.
-
-    Represents the rectangle with the # character.
-    """
-
-    if self._width == 0 or self._height == 0:
-        return "\n".join(["#" * self._width for i in range(self._height)])
+    if self.__w == 0 or self.__h == 0:
+        return""
+    return ("\n".join(['#' * self.__w for i in range(self.__h)]))
