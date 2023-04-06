@@ -3,50 +3,23 @@
 
 
 class Rectangle:
-    """Illustrates a rectangle"""
+    def __init__(self, w=0, h=0):
+        if not isinstance(w, int):
+            raise TypeError("width must be an integer")
+        if w < 0:
+            raise ValueError("width must be >= 0")
+        self.__width = w
 
-def __init__(self, width=0, height=0):
-    """Initialize a new Rectangle.
+        if not isinstance(h, int):
+            raise TypeError("height must be an integer")
+        if h < 0:
+            raise ValueError("height must be >= 0")
+        self.__height = h
 
+    def area(self):
+        return self.__width * self.__height
 
-    Args:
-        width (int): The width of the new rectangle.
-        height (int): The height of the new rectangle.
-    """
-
-    self._w = width
-    self._h = height
-
-@property
-def width(self):
-    """Get the width of the Rectangle."""
-    return self._w
-
-@width.setter
-def width(self, value):
-    if not isinstance(value, int):
-        raise TypeError("width must be an integer")
-    if value < 0:
-        raise ValueError("width must be >= 0")
-    self._w = value
-
-@property
-def height(self):
-    """Get the height of the Rectangle."""
-    return self._h
-
-@height.setter
-def height(self, value):
-    if not isinstance(value, int):
-        raise TypeError("height must be an integer")
-    if value < 0:
-        raise ValueError("height must be >= 0")
-    self._h = value
-
-def area(self):
-    """Return the area of the Rectangle."""
-    return self._w * self._h
-
-def perimeter(self):
-    """Return the perimeter of the Rectangle."""
-    return (self._w + self._h) * 2 if self._w != 0 and self.h != 0 else 0
+    def perimeter(self):
+        if self.__width == 0 or self.__height == 0:
+            return 0
+        return 2 * (self.__width + self.__height)
