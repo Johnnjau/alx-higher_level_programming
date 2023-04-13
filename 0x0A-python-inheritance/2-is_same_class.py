@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+#2-is_same_class.py
+
+
 """A function that checks if an object is an instance of a given class."""
 
 
