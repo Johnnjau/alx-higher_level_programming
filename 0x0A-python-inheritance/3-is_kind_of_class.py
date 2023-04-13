@@ -1,7 +1,8 @@
 #!/usr/bin/python3
+""" Definition of functions."""
+
+
 def is_instance_or_inherited(obj, target_class):
-
-
     """Checks if an object is an instance or inherited instance of a class
 
     Args:
