@@ -1,4 +1,4 @@
-#/usr/bin/python3
+#!/usr/bin/python3
 def is_instance_or_inherited(obj, target_class):
 
 
