@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-# 4-inherits_from.py
-
-
-"""Defines a function to check if an object is an instance of a
-specific class or its  subclass."""
+"""Defines a function to check if an object is an instance of a class."""
 
 
 def inherits_from(obj, a_class):
