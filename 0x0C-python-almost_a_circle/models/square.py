@@ -1,7 +1,10 @@
 #!usr/bin/python3
 """Defines a square class."""
 
-from models.rectangle import Rectangle
+import sys
+sys.path.append('./src') #add the directory containing models to the path 
+
+from rectangle import Rectangle
 
 
 class Square(Rectangle):
