@@ -1,10 +1,6 @@
 #!usr/bin/python3
 """Defines a square class."""
-
-import sys
-sys.path.append('/alx-higher_level_programming/0x0C-python-almost_a_circle/models') #add the directory containing models to the path 
-
-from rectangle import Rectangle
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
