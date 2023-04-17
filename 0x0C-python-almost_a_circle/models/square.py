@@ -2,7 +2,7 @@
 """Defines a square class."""
 
 import sys
-sys.path.append('./src') #add the directory containing models to the path 
+sys.path.append('/path/to/models') #add the directory containing models to the path 
 
 from rectangle import Rectangle
 
