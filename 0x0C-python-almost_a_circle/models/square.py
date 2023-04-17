@@ -2,7 +2,7 @@
 """Defines a square class."""
 
 import sys
-sys.path.append('/path/to/models') #add the directory containing models to the path 
+sys.path.append('/alx-higher_level_programming/0x0C-python-almost_a_circle/models') #add the directory containing models to the path 
 
 from rectangle import Rectangle
 
