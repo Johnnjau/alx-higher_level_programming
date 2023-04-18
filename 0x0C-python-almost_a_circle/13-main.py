@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ 13-main """
-from models.square import Square
 
+
+from models.square import Square
 
 if __name__ == "__main__":
 
