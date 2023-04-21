@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ 14-main """
+
+
 from models.base import Base
 from models.rectangle import Rectangle
 
@@ -12,9 +14,3 @@ if __name__ == "__main__":
     print(type(dictionary))
     print(json_dictionary)
     print(type(json_dictionary))
-
-guillaume@ubuntu:~/$ ./14-main.py
-{'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}
-<class 'dict'>
-[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
-<class 'str'>
