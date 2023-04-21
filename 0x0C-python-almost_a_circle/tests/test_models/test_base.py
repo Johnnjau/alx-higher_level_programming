@@ -1,221 +1,98 @@
 #!/usr/bin/python3
-"""Unittest definition for base.py
+"""Defines a base model class."""
 
 
-Unittest classes:
-    TestBase_instantiation
-    TestBase_to_json_string
-    TestBase_save_to_file
-    TestBase_from_json_string
-    TestBase_create
-    TestBase_load_from_file
-    TestBase_save_to_file
-    TestBase_load_from_file_csv
-"""
-import os
-import unittest
-from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
+import json
+import csv
+import turtle
 
 
-class TestBase_instantiation(unittest.TestCase):
-    """Testing instantiation Unittest"""
-    
-    def test_no_arg(self):
-        b1 = Base()
-        b2 = Base()
-        self.assertEqual(b1.id, b2.id - 1)
-        
-    def test_three_bases(self):
-        b1 = Base()
-        b2 = Base()
-        b3 = Base()
-        self.assertEqual(b1.id, b3.id - 2)
-        
-    def test_None_id(self):
-        b1 = Base(None)
-        b2 = Base(None)
-        self.assertEqual(b1.id, b2.id - 1)
-        
-    def test_unique_id(self):
-        self.assertEqual(12, Base(12).id)
-    
-    def test_nb_instances_after_unique_id(self):
-        b1 = Base()
-        b2 = Base(12)
-        b3 = Base()
-        self.assertEqual(b1.id, b3.id -1)
-    
-    def test_id_public(self):
-        b = Base(12)
-        b.id = 15
-        self.assertEqual(15, b.id)
-    
-    def test_nb_instances_private(self):
-        with self.assertRaises(AttributeError):
-            print(Base(12).__nb_instances)
-    
-    def test_str_id(self):
-        self.assertEqual("hello", Base("hello").id)
-    
-    def test_float_id(self):
-        self.assertEqual(5.5, Base(5.5).id)
+class Base:
+    """Represent the base model.
 
-    def test_complex_id(self):
-        self.assertEqual(complex(5), Base(complex(5)).id)
+    Represent the "base" for all other classes in project 0x0C*.
 
-    def test_dict_id(self):
-        self.assertEqual({"a": 1, "b": 2}, Base({"a": 1, "b": 2}).id)
-
-    def test_bool_id(self):
-        self.assertEqual(True, Base(True).id)
-    
-    def test_list_id(self):
-        self.assertEqual([1, 2, 3], Base([1, 2, 3]).id)
-
-    def test_tuple_id(self):
-        self.assertEqual((1, 2), Base((1, 2)).id)
-
-    def test_set_id(self):
-        self.assertEqual({1, 2, 3}, Base({1, 2, 3}).id)
-    
-    def test_frozenset_id(self):
-        self.assertEqual(frozenset({1, 2, 3}), Base(frozenset({1, 2, 3})).id)
-
-    def test_range_id(self):
-        self.assertEqual(range(5), Base(range(5)).id)
-
-    def test_bytes_id(self):
-        self.assertEqual(b'Python', Base(b'python').id)
-
-    def test_bytearray_id(self):
-        self.assertEqual(bytearray(b'abcdefgh'), Base(bytearray(b'abcdefgh')).id)
-
-    def test_memoryview_id(self):
-        self.assertEqual(memoryview(b'abcdefgh'), Base(memoryview(b'abcdefgh')).id)
-
-    def test_inf_id(self):
-        self.assertEqual(float('inf'), Base(float('inf')).id)
-
-    def test_Nan_id(self):
-        self.assertNotEqual(float('nan'), Base(float('nan')).id)
-
-    def test_two_args(self):
-        with self.assertRaises(TypeError):
-            Base(1, 2)
+    Attributes:
+        __nb_objects (int): The number of instantiated Bases.
+    """
 
 
-class TestBase_to_json_string(unittest.TestCase):
-    """Json_string Unittests"""
+    __nb_objects = 0
 
-    def test_to_json_string_rectangle_type(self):
-        r = Rectangle(10, 7, 2, 8, 6)
-        self.assertEqual(str, type(Base.to_json_string([r.to_dictionary()])))
+    def __init__(self, id=None):
+        """Initialize a new Base.
 
-    def test_to_json_string_rectangle_one_dict(self):
-        r = Rectangle(10, 7, 2, 8, 6)
-        self.assertTrue(len(Base.to_json_string([r.to_dictionary()])))
+        Args:
+            id (int): The identity of the new Base.
+        """
+        if id is not None:
+            self.id = id
+        else:
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
 
-    def test_to_json_string_rectangle_two_dicts(self):
-        r1 = Rectangle(2, 3, 5, 19, 2)
-        r2 = Rectangle(4, 2, 4, 1, 12)
-        list_dicts = [r1.to_dictionary(), r2.to_dictionary()]
-        self.assertTrue(len(Base.to_json_string(list_dicts)) == 106)
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """Return the JSON serialization of a list of dicts.
 
-    def test_to_json_string_square_type(self):
-        s = Square(10, 2. 3, 4)
-        self.assertEqual(str, type(Base.to_json_string([s.to_dictionary()])))
-
-    def test_to_json_string_square_two_dicts(self):
-        s1 = Square(10, 2, 3, 4)
-        s2 = Square(4, 5, 21, 2)
-        list_dicts = [s1.to_dictionary(), s2.to_dictionary()]
-        self.assertTrue(len(Base.to_json_string(list_dicts)) == 78)
-
-    def test_to_json_string_empty_list(self):
-        self.assertEqual("[]", Base.to_json_string([]))
-
-    def test_to_json_string_none(self):
-        self.assertEqual("[]", Base.to_json_string(None))
-
-    def test_to_json_string_no_args(self):
-        with self.assertRaises(TypeError):
-            Base.to_json_string([], 1)
-
-
-class TestBase_save_to_file(unittest.TestCase):
-    """Save_to_file Unittests method of Base class."""
+        Args:
+            list_dictionaries (list): A list of dictionaries.
+        """
+        if list_dictionaries is None or list_dictionaries == []:
+            return "[]"
+        return json.dumps(list_dictionaries)
 
     @classmethod
-    def tearDown(self):
-        """Erase any files."""
-        try:
-            os.remove("Rectangle.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Square.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Base.json")
-        except IOError:
-            pass
+    def save_to_file(cls, list_objs):
+        """Write the JSON serialization of a list of objects to a file.
 
-    def test_save_to_file_one_rectangle(self):
-        r = Rectangle(10, 7, 2, 8, 5)
-        Rectangle.save_to_file([r])
-        with open("Rectangle.json", "r") as f:
-            self.assertTrue(len(f.read()) == 53)
+        Args:
+            list_objs (list): A list of inherited Base instances.
+        """
+        filename = cls.__name__ + ".json"
+        with open(filename, "w") as jsonfile:
+            if list_objs is None:
+                jsonfile.write("[]")
+            else:
+                list_dicts = [obj.to_dictionary() for obj in list_objs]
+                jsonfile.write(Base.to_json_string(list_dicts))
 
-    def test_save_to_file_two_rectangles(self):
-        r1 = Rectangle(10, 7, 2, 8, 5)
-        r2 = Rectangle(2, 4, 1, 2, 3)
-        Rectangle.save_to_file([r1, r2])
-        with open("Rectangle.json", "r") as f:
-            self.assertTrue(len(f.read()) == 105)
+    @staticmethod
+    def from_json_string(json_string):
+        """Return the deserialization of JSON string.
 
-    def test_save_to_file_one_square(self):
-        s = Square(10, 7, 2, 8)
-        Square.save_to_file([s])
-        with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+        Args:
+            json_string (str): A JSON str representation of a list of dicts.
+        Returns:
+            If Json_string is none or empty - an emptylist.
+            Otherwise - the Python list represented by json_string.
+        """
+        if json_string is None or json_string == "[]":
+            return []
+        return json.loads(json_string)
 
-    def test_save_to_file_two_squares(self):
-        s1 = Square(10, 7, 2, 8)
-        s2 = Square(8, 1, 2, 3)
-        Square.save_to_file([s1, s2])
-        with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 77)
+    @classmethod
+    def create(cls, **dictionary):
+        """Return a class instantied from a dictionary of attributes.
 
-    def test_save_to_file_cls_name_for_filename(self):
-        s = Square(10, 7, 2, 8)
-        Base.save_to_file([s])
-        with open("Base.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+        Args:
+            **dictionary (dict): Key/value pairs of attributes to initialize.
+        """
+        if dictionary and dictionary != {}:
+            if cls.__name__ == "Rectangle":
+                new = cls(1, 1)
+            else:
+                new = cls(1)
+            new.update(**dictionary)
+            return new
 
-    def test_save_to_file_overwrite(self):
-        s = Square(9, 2, 39, 2)
-        Square.save_to_file([s])
-        s = Square(10, 7, 2, 8)
-        Square.save_to_file([s])
-        with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+    @classmethod
+    def load_from_file(cls):
+        """Return a list of classes instantiated from a file of JSON strings.
 
-    def test_save_to_file_None(self):
-        Square.save_to_file(None)
-        with open("Square.json", "r") as f:
-            self.assertEqual("[]", f.read())
+        Reads from '<cls.__name__>.json'.
 
-    def test_save_to_file_empty_list(self):
-        Square.save_to_file([])
-        with open("Square.json", "r") as f:
-            self.assertEqual("[]", f.read())
-
-    def test_save_to_file_more_than_one_arg(self):
-        with self.assertRaises(TypeError):
-            Square.save_to_file([], 1)
-
-class TestBase_from_json_string(unittest.TestCase):
-    """ Json_string method of Base class."""
+        Returns:
+            If the file does not exist - an empty list.
+            Otherwise - a
+        """
