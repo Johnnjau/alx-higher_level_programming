@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""Definition of a rectangle class."""
+"""Import Base class from module.base"""
 
 
 from models.base import Base
+import json
+"""define a class Rectangle that inherits from Base"""
 
 
 class Rectangle(Base):
