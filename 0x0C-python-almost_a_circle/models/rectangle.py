@@ -6,20 +6,17 @@ from models.base import Base
 import json
 """define a class Rectangle that inherits from Base"""
 
-
 class Rectangle(Base):
     """Represent a rectangle."""
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initialize a new Rectangle.
-
         Args:
             width (int): The width of the new Rectangle.
             height (int): The height of the new Rectangle.
             x (int): The x coordinate of the new Rectangle.
             y (int): The y coordinate of the new Rectangle.
             id (int): The identity of the new Rectangle.
-
         Raises:
             TypeError: If either 'width' or 'height' is not an int.
             ValueError: If either 'width' or 'height' is <= 0.
@@ -78,4 +75,23 @@ class Rectangle(Base):
             raise TypeError("y must be an integer")
         if value < 0:
             raise ValueError("y must be >= 0")
-        self.__
+        self.__y = value
+
+    """define a method"""
+    def __str__(self):
+        """returns [Rectangle] (<id>) <x>/<y> -
+        <width>/<height> representation"""
+        return "[Rectangle] ({}) {}/{} - {}/{}". format(
+                self.id, self.x, self.y, self.width, self.height
+            )
+
+    """define a method"""
+    def save_to_file(cls, list_objs):
+        """a json representation of a file"""
+        if list_objs is None:
+            list_objs = []
+        fn = cls.__name__ + ".json"
+        with open(fn, "w") as f:
+            f.write(cls.to_json_string([
+                obj.to_dictionary() for obj in list_objs
+            ]))
