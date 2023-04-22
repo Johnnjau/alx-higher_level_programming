@@ -93,5 +93,5 @@ class Rectangle(Base):
         fn = cls.__name__ + ".json"
         with open(fn, "w") as f:
             f.write(cls.to_json_string([
-                obj.to_dictionary() for obj in list_objs
+                obj.to_dictionary() for obj in list_obj
             ]))
