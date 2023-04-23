@@ -1,11 +1,13 @@
 #!usr/bin/python3
 """Defines a square class."""
+
 from models.rectangle import Rectangle
+
+"""define a class square that inherits from Rectangle."""
 
 
 class Square(Rectangle):
     """Represent a square."""
-
     def __init__(self, size, x=0, y=0, id_=None):
         """Initialize a new square.
         
