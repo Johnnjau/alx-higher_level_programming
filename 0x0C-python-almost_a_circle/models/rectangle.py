@@ -11,7 +11,6 @@ import json
 class Rectangle(Base):
     """Represent a rectangle."""
 
-    """Initialize a new instance."""
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initialize a new Rectangle.
 
@@ -58,16 +57,16 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """Set/get the x coordinate of the Rectangle."""
-        return self.__x
+       """Set/get the x coordinate of the Rectangle."""
+       return self.__x
 
     @x.setter
     def x(self, value):
-        if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
-            self.__x = value
+       if not isinstance(value, int):
+           raise TypeError("x must be an integer")
+       if value < 0:
+           raise ValueError("x must be >= 0")
+       self.__x = value
 
     @property
     def y(self):
@@ -80,23 +79,4 @@ class Rectangle(Base):
             raise TypeError("y must be an integer")
         if value < 0:
             raise ValueError("y must be >= 0")
-        self.__y = value
-
-    """define a method"""
-    def __str__(self):
-        """returns [Rectangle] (<id>) <x>/<y> -
-        <width>/<height> representation"""
-        return "[Rectangle] ({}) {}/{} - {}/{}". format(
-                self.id, self.x, self.y, self.width, self.height
-            )
-
-    """define a method"""
-    def save_to_file(cls, list_objs):
-        """a json representation of a file"""
-        if list_objs is None:
-            list_objs = []
-        fn = cls.__name__ + ".json"
-        with open(fn, "w") as f:
-            f.write(cls.to_json_string([
-                obj.to_dictionary() for obj in list_objs
-            ]))
+        self.__
