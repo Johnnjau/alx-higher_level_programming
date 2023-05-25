@@ -4,7 +4,9 @@
 
 from models.base import Base
 import json
+
 """define a class Rectangle that inherits from Base"""
+
 
 class Rectangle(Base):
     """Represent a rectangle."""
