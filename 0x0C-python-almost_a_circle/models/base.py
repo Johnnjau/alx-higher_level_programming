@@ -14,10 +14,6 @@ class Base:
     Attributes:
         __nb_objects (int): The number of instantiated Bases.
     """
-<<<<<<< HEAD
-
-=======
->>>>>>> 7fa1ba9d8a74e927464a23f0cc56f6f540b474ea
     __nb_objects = 0
 
     def __init__(self, id=None):
