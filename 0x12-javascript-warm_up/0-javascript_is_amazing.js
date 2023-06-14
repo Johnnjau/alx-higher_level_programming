@@ -1,2 +1,4 @@
 #!/usr/bin/node
-module.exports = class Rectangle {};
+'user strict';
+const myVar = 'Javascript is amazing'
+console.log(myVar);
