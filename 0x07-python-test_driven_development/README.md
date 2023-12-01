@@ -1,0 +1,2 @@
+In this Project, I learn and practice about unittests and how as a programmer I need to run my tests systematically as I create different functions and programmes.
+Running Unittests eventually leads up to Test Driven Development and this basically means creating tests before creating functions or programmes. This is an alternative line of thought that is usually used with programmers and it involves thinking in foresight where bugs or problems might arise when creating functions or programmes and creating tests before coding so as to solve these issues before they arise.
