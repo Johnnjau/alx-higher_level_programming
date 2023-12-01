@@ -1,0 +1,55 @@
+# test_add_integer.txt
+
+from 0-add_integer import add_integer
+import unittest
+
+class TestAddInteger(unittest.TestCase):
+    """
+    Defines test cases for the add_integer function.
+    """
+
+    def test_simple_addition(self):
+        self.assertEqual(add_integer(2, 3), 5)
+        self.assertEqual(add_integer(2, -3), -1)
+        self.assertEqual(add_integer(-1, 2), 1)
+        self.assertEqual(add_integer(2, 2), 4)
+
+    def test_default_second_argument(self):
+        self.assertEqual(add_integer(2), 100)
+
+    def test_floats(self):
+        self.assertEqual(add_integer(2.0, 3.0), 5)
+        self.assertEqual(add_integer(2.9, 0.2), 2)
+        self.assertEqual(add_integer(-2.9, -0.2), -2)
+        self.assertEqual(add_integer(2.3, -3), -1)
+
+    def test_type_errors(self):
+        with self.assertRaises(TypeError):
+            add_integer("hello", 3)
+            add_integer(2, "hello")
+            add_integer(None)
+            add_integer(2.3, None)
+            add_integer('math', 4)
+            add_integer(5, 'math')
+            add_integer('math', 'math')
+
+    def test_overflow_and_nan(self):
+        with self.assertRaises(OverflowError):
+            add_integer(float('inf'))
+            add_integer(2, float('inf'))
+
+        with self.assertRaises(ValueError):
+            add_integer(float('nan'))
+            add_integer(2, float('nan'))
+
+    def test_integer_casting(self):
+        self.assertEqual(add_integer(20.6, 10), 30)
+        self.assertEqual(add_integer(10, 20.6), 30)
+        self.assertEqual(add_integer(int(10.3), 5), 15)
+
+    def test_missing_arguments(self):
+        with self.assertRaises(TypeError):
+            add_integer()
+
+if __name__ == "__main__":
+    unittest.main()
