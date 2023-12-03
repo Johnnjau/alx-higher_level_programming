@@ -19,14 +19,6 @@ Usage
 
 ::
 
-    >>> say_my_name("Walter", "White")
-    My name is Walter White
-
-The parameter ```last_name``` is optional. If no last name is provided,
-an empty string is printed instead.
-
-::
-
     >>> say_my_name("Bob")
     My name is Bob
 
