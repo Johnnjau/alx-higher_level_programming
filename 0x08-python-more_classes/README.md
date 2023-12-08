@@ -1,1 +1,0 @@
-A Repository that describes and show cases object oriented programming in the case of Regular Methods, Class Methods and Static Methods.
