@@ -1,0 +1,1 @@
+In this Project, I look at the interaction of python and databases. I also go aead and look at the delicate interractions between python with ORM and without ORM's and the keen differences between the two. The SQLAlchemy which is related to ORM's makes life easier for developers by modifying some of the shortcomings of MYSQLdb. This projects look at these uniqrue differences.
