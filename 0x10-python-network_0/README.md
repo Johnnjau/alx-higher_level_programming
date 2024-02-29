@@ -1,0 +1,1 @@
+In this project I look at the various the basic and fundamental network protocal that basically involve http tcp/ip  the DNS , and everything that happens within a webframework from the time the user submits a http or any request for that matter from their browser up until the time they receive it.
