@@ -1,20 +1,30 @@
 #!/usr/bin/node
 const request = require('request');
-const url = 'https://swapi.co/api/films/' + process.argv[2];
-request(url, function (error, response, body) {
-  if (!error) {
-    const characters = JSON.parse(body).characters;
-    printCharacters(characters, 0);
+
+// Get the movie ID from the command line arguments
+const movieId = process.argv[2];
+
+// Make a request to the Star Wars API
+request(`https://swapi-api.alx-tools.com/api/films/${movieId}`, (error, response, body) => {
+  if (error) {
+    console.error('Error:', error);
+  } else if (response.statusCode !== 200) {
+    console.error('Unexpected status code:', response.statusCode);
+  } else {
+    // Parse the JSON response
+    const film = JSON.parse(body);
+    // Print the characters of the movie
+    film.characters.forEach(characterUrl => {
+      request(characterUrl, (error, response, body) => {
+        if (error) {
+          console.error('Error:', error);
+        } else if (response.statusCode !== 200) {
+          console.error('Unexpected status code:', response.statusCode);
+        } else {
+          const character = JSON.parse(body);
+          console.log(character.name);
+        }
+      });
+    });
   }
 });
-
-function printCharacters (characters, index) {
-  request(characters[index], function (error, response, body) {
-    if (!error) {
-      console.log(JSON.parse(body).name);
-      if (index + 1 < characters.length) {
-        printCharacters(characters, index + 1);
-      }
-    }
-  });
-}
